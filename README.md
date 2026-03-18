@@ -1,0 +1,1 @@
+The function if the project is to be able to let the user visulise their life and regulate their habits based on the statistics shown on the program. the goal of this project is to learn how to corporate with people and in depth file handling for.

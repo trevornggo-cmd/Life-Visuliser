@@ -97,6 +97,15 @@ namespace Life_Visuliser
         private void optionBtn_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
+            int agreeability;
+            if(!int.TryParse(b.Text,out agreeability))
+            {
+                MessageBox.Show("the button text is not a number");
+            }
+            else
+            {
+                MessageBox.Show("it worked");
+            }
 
         }
 

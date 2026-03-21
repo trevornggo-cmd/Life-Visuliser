@@ -15,13 +15,17 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Life_Visuliser
 {
+    struct statsIndex
+    {
+        public string Social;
+    }
     public partial class Form1 : Form
     {
         string fileToStarterQuestions = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "StarterQ.txt");
         List<string> questions = new List<string>();
         public Form1()
         {
-            if (File.Exists(fileToStarterQuestions))
+            if (Directory.Exists(fileToStarterQuestions))
             {
                 foreach (string s in File.ReadAllLines(fileToStarterQuestions))
                 {
@@ -30,7 +34,7 @@ namespace Life_Visuliser
             }
             else
             {
-                File.WriteAllText(fileToStarterQuestions, "testing");
+                Directory.CreateDirectory(fileToStarterQuestions);
             }
             InitializeComponent();
             {

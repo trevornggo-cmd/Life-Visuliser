@@ -31,7 +31,7 @@ namespace Life_Visuliser
         List<string> questions = new List<string>();
         public Form1()
         {
-            if (Directory.Exists(fileToStarterQuestions))
+            if (File.Exists(fileToStarterQuestions))
             {
                 foreach (string s in File.ReadAllLines(fileToStarterQuestions))
                 {
@@ -40,7 +40,7 @@ namespace Life_Visuliser
             }
             else
             {
-                Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data"));
+                Directory.CreateDirectory(fileToStarterQuestions);
             }
             InitializeComponent();
             {

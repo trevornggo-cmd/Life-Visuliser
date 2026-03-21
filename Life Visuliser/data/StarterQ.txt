@@ -1,0 +1,29 @@
+financial-I feel confident in my ability to manage my money effectively
+social-I feel comfortable starting conversations with new people
+mental-I can manage stress in a healthy way
+physical-I feel satisfied with my current level of fitness
+purposeful-I have a clear sense of direction in life
+
+social-I have strong and supportive friendships
+financial-I regularly save money for future goals
+physical-I have enough energy to get through my daily activities
+mental-I feel in control of my thoughts and emotions
+purposeful-I feel that my daily actions align with my goals
+
+physical-I maintain a healthy and balanced diet
+mental-I am generally optimistic about life
+social-I feel understood by the people around me
+financial-I feel in control of my spending habits
+purposeful-I feel motivated to work towards something meaningful
+
+mental-I can stay focused on tasks without getting overwhelmed
+physical-I get enough quality sleep regularly
+social-I actively maintain relationships that matter to me
+financial-I have a clear financial plan for the next few years
+purposeful-I understand what gives my life purpose
+
+social-I feel confident expressing myself in social situations
+physical-I take care of my body consistently
+mental-I feel mentally resilient when facing challenges
+financial-I rarely feel stressed about money
+purposeful-I feel fulfilled by what I do on a daily basis

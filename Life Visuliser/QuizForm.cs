@@ -22,6 +22,7 @@ namespace Life_Visuliser
             InitializeComponent();
             this.quizIntro = quizIntro;
             this.questions = quizQuestions;
+            this.IntroLbl.Text = quizIntro;
         }
         private void InitializeComponent()
         {
@@ -36,7 +37,7 @@ namespace Life_Visuliser
             this.IntroLbl.Name = "IntroLbl";
             this.IntroLbl.Size = new System.Drawing.Size(451, 71);
             this.IntroLbl.TabIndex = 0;
-            this.IntroLbl.Text = quizIntro;
+            this.IntroLbl.Text = " ";
                
             // 
             // beginQuizBtn
@@ -65,11 +66,11 @@ namespace Life_Visuliser
             this.QuestionLbl = new System.Windows.Forms.Label();
             this.QuestionLbl.AutoSize = true;
             this.QuestionLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QuestionLbl.Location = new System.Drawing.Point(195, 52);
             this.QuestionLbl.Name = "QuestionLbl";
-            this.QuestionLbl.Size = new System.Drawing.Size(158, 55);
+            this.QuestionLbl.Size = new System.Drawing.Size(1000, 55);
             this.QuestionLbl.TabIndex = 0;
-            this.QuestionLbl.Text = question + "(1 being i completly disagree and 10 being i completely agree)";
+            this.QuestionLbl.Text = question + "\n(1 being i completly disagree and 10 being i completely agree)";
+            this.QuestionLbl.Location = new System.Drawing.Point(0, 152);
 
             for (int i = 0; i < 10; i++)
             {
@@ -79,6 +80,7 @@ namespace Life_Visuliser
                 AllButtons[i].TabIndex = 6;
                 AllButtons[i].Text = $"{i + 1}";
                 AllButtons[i].UseVisualStyleBackColor = true;
+                AllButtons[i].Click += new System.EventHandler(this.optionBtn_Click);
                 this.Controls.Add(AllButtons[i]);
             }
             this.Controls.Add(QuestionLbl);
@@ -90,6 +92,12 @@ namespace Life_Visuliser
             {
                 PresentQuestion(questions[i]);
             }
+        }
+
+        private void optionBtn_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+
         }
 
 

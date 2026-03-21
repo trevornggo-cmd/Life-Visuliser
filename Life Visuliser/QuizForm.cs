@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace Life_Visuliser
             this.beginQuizBtn.TabIndex = 1;
             this.beginQuizBtn.Text = "Begin";
             this.beginQuizBtn.UseVisualStyleBackColor = true;
-            this.beginQuizBtn.Click += new System.EventHandler(this.beginQuizBtn_Click);
+            this.beginQuizBtn.Click += new System.EventHandler(this.optionBtn_Click);
             // 
             // QuizForm
             // 
@@ -59,7 +60,6 @@ namespace Life_Visuliser
             this.ResumeLayout(false);
 
         }
-
         private void PresentQuestion(string question)
         {
             this.Controls.Clear();
@@ -84,29 +84,21 @@ namespace Life_Visuliser
                 this.Controls.Add(AllButtons[i]);
             }
             this.Controls.Add(QuestionLbl);
+            
         }
 
-        private void beginQuizBtn_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < questions.Count; i++)
-            {
-                PresentQuestion(questions[i]);
-            }
-        }
 
+        int counter = 0;
         private void optionBtn_Click(object sender, EventArgs e)
         {
+            PresentQuestion(questions[counter]);
             Button b = (Button)sender;
             int agreeability;
             if(!int.TryParse(b.Text,out agreeability))
             {
                 MessageBox.Show("the button text is not a number");
             }
-            else
-            {
-                MessageBox.Show("it worked");
-            }
-
+            counter++;
         }
 
 

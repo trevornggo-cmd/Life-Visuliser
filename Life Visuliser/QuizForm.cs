@@ -150,14 +150,8 @@ namespace Life_Visuliser
 
         private void JSONDumpingTheResults()
         {
-
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Life Visuliser", "QuizResult.json");
-            string folder = Path.GetDirectoryName(path);
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-            string jsonContents = JsonConvert.SerializeObject(foolProveStatCountSystem,Formatting.Indented);
+            string jsonContents = JsonConvert.SerializeObject(foolProveStatCountSystem);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "backend reciving point.json");
             File.WriteAllText(path, jsonContents);
         }
     }

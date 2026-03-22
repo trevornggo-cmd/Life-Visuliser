@@ -16,7 +16,7 @@ using System.Security.Permissions;
 
 namespace Life_Visuliser
 {
-    
+
     public partial class Form1 : Form
     {
 
@@ -33,53 +33,26 @@ namespace Life_Visuliser
         readonly List<string> questions = new List<string>();
         public Form1()
         {
+            callingPython();
             InitializeComponent();
-            if (File.Exists(fileToStarterQuestions))
-            {
-                foreach (string s in File.ReadAllLines(fileToStarterQuestions))
-                {
-                    questions.Add(s);
-                }
-            }
-            else
-            {
-                Directory.CreateDirectory(fileToStarterQuestions);
-            }
-
-            {
-                //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-                /*  ProcessStartInfo psi = new ProcessStartInfo();
-                  psi.FileName = "python";
-                  psi.WorkingDirectory = "C:\\Users\\trevo\\OneDrive\\Documents\\C# thing\\a new personal winform folder\\Life Visuliser\\Life Visuliser";
-                  psi.Arguments = "python.py";
-
-                  Process process = Process.Start(psi);
-                  process.WaitForExit();*/
-                //^^^^^^This is the call for the python script to run^^^^^^^
-            }
-
-            if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "Data.JSON")))
-            {
-                QuizForm starterQuiz = new QuizForm("as you are new we have prepared a quiz for you to start and see where you currently are.", questions);
-                Application.Run(starterQuiz); //<--- this is a class that will get the innitial statistics to store into a json file
-            }
-            else
-            {
-
-            }
-
             
         }
 
-        private void AccessToJson()
+        /// <summary>
+        /// when i call this function python will activate and send data to bin/debug/file.json
+        /// </summary>
+        public void callingPython() 
         {
-            throw new NotImplementedException();
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "python";
+            psi.WorkingDirectory = "C:\\Users\\trevo\\OneDrive\\Documents\\C# thing\\a new personal winform folder\\Life Visuliser\\Life Visuliser";
+            psi.Arguments = "python.py";
+            Process process = Process.Start(psi);
+            process.WaitForExit();
         }
 
 
     }
-
-
 }
 
 

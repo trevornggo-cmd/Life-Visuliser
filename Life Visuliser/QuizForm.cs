@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Life_Visuliser
 {
@@ -25,7 +28,7 @@ namespace Life_Visuliser
             public int physical;
             public int purposeful;
         }
-        private StatCounter foolProveIndexSystem = new StatCounter { social = 0, financial = 0, mental = 0, physical = 0, purposeful =  0};
+        private StatCounter foolProveStatCountSystem = new StatCounter { social = 0, financial = 0, mental = 0, physical = 0, purposeful =  0};
         public QuizForm(string quizIntro, List<string> quizQuestions)
         {
             InitializeComponent();
@@ -105,28 +108,31 @@ namespace Life_Visuliser
             PresentQuestion(questions[counter]);
             Button b = (Button)sender;
             int agreeability;
-            int.TryParse(b.Text, out agreeability);
+            if(int.TryParse(b.Text, out agreeability))
+            {
+                counter++;
+            }
             switch (currentQ[0])
             {
                 case "financial":
-                    foolProveIndexSystem.financial += agreeability;
+                    foolProveStatCountSystem.financial += agreeability;
                     break;
                 case "social":
-                    foolProveIndexSystem.social += agreeability;
+                    foolProveStatCountSystem.social += agreeability;
                     break;
                 case "mental":
-                    foolProveIndexSystem.mental += agreeability;
+                    foolProveStatCountSystem.mental += agreeability;
                     break;
                 case "physical":
-                    foolProveIndexSystem.physical += agreeability;
+                    foolProveStatCountSystem.physical += agreeability;
                     break;
                 case "purposeful":
-                    foolProveIndexSystem.purposeful += agreeability;
+                    foolProveStatCountSystem.purposeful += agreeability;
                     break;
 
             }
-            counter++;
-            if (!(counter < questions.Count -1))
+           
+            if (!(counter < questions.Count))
             {
                 this.Controls.Clear();
                 Label OutroLbl = new System.Windows.Forms.Label();
@@ -137,14 +143,22 @@ namespace Life_Visuliser
                 OutroLbl.TabIndex = 0;
                 OutroLbl.Text = "Now that we have your score we are able to begin your life visulisation\n(press that cross button on the top right corner to continue)";
                 this.Controls.Add(OutroLbl);
+                JSONDumpingTheResults();
 
             }
         }
-        public StatCounter ReturnResults()
+
+        private void JSONDumpingTheResults()
         {
-            return foolProveIndexSystem;
+
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Life Visuliser", "QuizResult.json");
+            string folder = Path.GetDirectoryName(path);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            string jsonContents = JsonConvert.SerializeObject(foolProveStatCountSystem,Formatting.Indented);
+            File.WriteAllText(path, jsonContents);
         }
-
-
     }
 }

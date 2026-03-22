@@ -17,7 +17,15 @@ namespace Life_Visuliser
         private List<string> questions = new List<string>();
         private string quizIntro = " ";
 
-
+        public struct StatCounter
+        {
+            public int social;
+            public int financial;
+            public int mental;
+            public int physical;
+            public int purposeful;
+        }
+        private StatCounter foolProveIndexSystem = new StatCounter { social = 0, financial = 0, mental = 0, physical = 0, purposeful =  0};
         public QuizForm(string quizIntro, List<string> quizQuestions)
         {
             InitializeComponent();
@@ -60,8 +68,11 @@ namespace Life_Visuliser
             this.ResumeLayout(false);
 
         }
+
+        string[] currentQ;
         private void PresentQuestion(string question)
         {
+            currentQ = question.Split('-');
             this.Controls.Clear();
             this.QuestionLbl = new System.Windows.Forms.Label();
             this.QuestionLbl.AutoSize = true;
@@ -69,7 +80,7 @@ namespace Life_Visuliser
             this.QuestionLbl.Name = "QuestionLbl";
             this.QuestionLbl.Size = new System.Drawing.Size(1000, 55);
             this.QuestionLbl.TabIndex = 0;
-            this.QuestionLbl.Text = question + "\n(1 being i completly disagree and 10 being i completely agree)";
+            this.QuestionLbl.Text = currentQ[1] + "\n(1 being i completly disagree and 10 being i completely agree)";
             this.QuestionLbl.Location = new System.Drawing.Point(0, 152);
 
             for (int i = 0; i < 10; i++)
@@ -94,11 +105,44 @@ namespace Life_Visuliser
             PresentQuestion(questions[counter]);
             Button b = (Button)sender;
             int agreeability;
-            if(int.TryParse(b.Text,out agreeability))
+            int.TryParse(b.Text, out agreeability);
+            switch (currentQ[0])
             {
+                case "financial":
+                    foolProveIndexSystem.financial += agreeability;
+                    break;
+                case "social":
+                    foolProveIndexSystem.social += agreeability;
+                    break;
+                case "mental":
+                    foolProveIndexSystem.mental += agreeability;
+                    break;
+                case "physical":
+                    foolProveIndexSystem.physical += agreeability;
+                    break;
+                case "purposeful":
+                    foolProveIndexSystem.purposeful += agreeability;
+                    break;
 
             }
             counter++;
+            if (!(counter < questions.Count -1))
+            {
+                this.Controls.Clear();
+                Label OutroLbl = new System.Windows.Forms.Label();
+                OutroLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                OutroLbl.Location = new System.Drawing.Point(54, 21);
+                OutroLbl.Name = "OutroLbl";
+                OutroLbl.Size = new System.Drawing.Size(451, 71);
+                OutroLbl.TabIndex = 0;
+                OutroLbl.Text = "Now that we have your score we are able to begin your life visulisation\n(press that cross button on the top right corner to continue)";
+                this.Controls.Add(OutroLbl);
+
+            }
+        }
+        public StatCounter ReturnResults()
+        {
+            return foolProveIndexSystem;
         }
 
 

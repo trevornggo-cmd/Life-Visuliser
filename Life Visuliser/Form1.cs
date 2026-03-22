@@ -16,21 +16,24 @@ using System.Security.Permissions;
 
 namespace Life_Visuliser
 {
-    struct statsIndex
-    {
-        public int social;
-        public int financial;
-        public int mental;
-        public int physical;
-        public int purposeful;
-    }
+    
     public partial class Form1 : Form
     {
-        statsIndex foolProveIndexSystem = new statsIndex { social = 0, financial = 1, mental = 2, physical = 3, purposeful = 4 };
-        string fileToStarterQuestions = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "StarterQ.txt");
-        List<string> questions = new List<string>();
+
+        public struct StatCounter
+        {
+            public int social;
+            public int financial;
+            public int mental;
+            public int physical;
+            public int purposeful;
+        }
+
+        readonly string fileToStarterQuestions = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "StarterQ.txt");
+        readonly List<string> questions = new List<string>();
         public Form1()
         {
+            InitializeComponent();
             if (File.Exists(fileToStarterQuestions))
             {
                 foreach (string s in File.ReadAllLines(fileToStarterQuestions))
@@ -42,7 +45,7 @@ namespace Life_Visuliser
             {
                 Directory.CreateDirectory(fileToStarterQuestions);
             }
-            InitializeComponent();
+
             {
                 //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
                 /*  ProcessStartInfo psi = new ProcessStartInfo();
@@ -57,13 +60,15 @@ namespace Life_Visuliser
 
             if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "Data.JSON")))
             {
-                Application.Run(new QuizForm("as you are new we have prepared a quiz for you to start and see where you currently are.", questions)); //<--- this is a class that will get the innitial statistics to store into a json file
+                QuizForm starterQuiz = new QuizForm("as you are new we have prepared a quiz for you to start and see where you currently are.", questions);
+                Application.Run(starterQuiz); //<--- this is a class that will get the innitial statistics to store into a json file
             }
             else
             {
 
             }
 
+            
         }
 
         private void AccessToJson()
